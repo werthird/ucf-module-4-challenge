@@ -1,0 +1,6 @@
+:root {
+  --color-dark: rgb(1, 77, 1);
+  --color-light: rgb(0, 157, 0);
+  --border-dark: 1px dashed rgb(1, 77, 1); 
+  --border-light: 1px dashed rgb(0, 157, 0);
+}

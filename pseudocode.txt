@@ -36,3 +36,13 @@ C. Code script file
     b. button to go back to main page
     c. button to clear scoreboard
   13. Bring user back to main index page
+
+
+
+  Riders Notes
+  - Do we dynamically build html or on the page html?
+  - Recommendation:
+    - Build a skeleton html, style with Javascript
+  - Build an array with the questions. Itereate through the array for the questions
+  - Build an array of answer options to store the answers in
+  - 

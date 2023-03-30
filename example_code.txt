@@ -1,0 +1,206 @@
+----------------------------------------------------------
+Timer 
+- Displays count down of time on page
+- When timer is done, adds content to page
+----------------------------------------------------------
+
+// Selects element by class
+var timeEl = document.querySelector(".time");
+
+// Selects element by id
+var mainEl = document.getElementById("main");
+
+var secondsLeft = 10;
+
+function setTime() {
+  // Sets interval in variable
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
+
+    if(secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      // Calls function to create and append image
+      sendMessage();
+    }
+
+  }, 1000);
+}
+
+// Function to create and append colorsplosion image
+function sendMessage() {
+  timeEl.textContent = " ";
+  var imgEl = document.createElement("img");
+  imgEl.setAttribute("src", "images/image_1.jpg");
+  mainEl.appendChild(imgEl);
+
+}
+
+setTime();
+
+
+
+
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+                Event Listener - Click
+- When called, increments a variable up or down
+- Displays incremented vaiable onto page
+- Prevents from decrementing below a set number
+----------------------------------------------------------
+----------------------------------------------------------
+
+// sets curent count
+var count = 0;
+// gets the elements from the page
+var incrementEl = document.querySelector("#increment");
+var decrementEl = document.querySelector("#decrement");
+var countEl = document.querySelector("#count");
+
+
+//updates the page
+function setCounterText() {
+  countEl.textContent = count;
+}
+
+// event listener to incriment count
+incrementEl.addEventListener("click", function() {
+  count++;          // increments count by one
+  setCounterText(); // runs function to update page with new count value
+});
+
+// event listener to decrement count
+decrementEl.addEventListener("click", function() {
+  if (count > 0) {    // checks if count is at 0 before decrementing count
+    count--;          // decrement count by one
+    setCounterText(); // runs function to update page with new count value
+  } else {
+    alert("Sorry, you cant go lower then 0.");
+    return;
+  }
+});
+
+
+
+
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+                Event Listener - Click
+- Click event function can be outside click event
+----------------------------------------------------------
+----------------------------------------------------------
+
+var submitEl = document.querySelector("#submit");
+var nameInput = document.querySelector("#name");
+var emailInput = document.querySelector("#email");
+var submissionResponseEl = document.querySelector("#response");
+
+let userName = "";
+let userEmail = "";
+
+// Action to be performed on click store in named function
+function showResponse(event) {
+  // Prevent default action
+  event.preventDefault();
+  console.log(event);
+
+  userName = nameInput.value;
+  userEmail = emailInput.value;
+  console.log(userName);
+  console.log(userEmail);
+
+  var response = "Thank you for your submission " + nameInput.value + "! We will reach out to you at " + emailInput.value + ".";
+  submissionResponseEl.textContent = response;
+}
+  
+// Add listener to submit element
+submitEl.addEventListener("click", showResponse);
+
+
+
+
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+                Event Listener - Click
+- Prevents form default submit, which is to refresh the page
+----------------------------------------------------------
+----------------------------------------------------------
+
+var tipEl = document.querySelector("#tip-percentage");
+var totalEl = document.querySelector("#total");
+var submitEl = document.querySelector("#submit");
+
+function calculateTip(total, tipPercentage) {
+  var roundedResult = (total * tipPercentage).toFixed(2);
+  return roundedResult;
+}
+
+function calculateTotal(total, tipAmount) {
+  return parseFloat(total) + parseFloat(tipAmount);
+}
+
+// function that logs value onto page
+function addTip(event) {
+  event.preventDefault(); // prevents default refresh of page when form is submitted
+  var tipPercentage = tipEl.value * .01; // converts tip input to percentage
+  var total = totalEl.value;
+  var tipAmount = calculateTip(total, tipPercentage);
+  var newTotal = calculateTotal(tipAmount, total);
+  document.querySelector("#tip-amount").textContent = tipAmount;
+  document.querySelector("#new-total").textContent = newTotal.toFixed(2); //fixes the responce formated at two decimal spaces, like money
+}
+
+submitEl.addEventListener("click", addTip);
+
+
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+How to store questions, possible answers, and correct answers in an array of abjects
+- Prevents form default submit, which is to refresh the page
+----------------------------------------------------------
+----------------------------------------------------------
+
+// We need to track which question we are currently on
+var QIndex = 0;
+var time = 70;
+// The Questions should be stored in an array (Each One is an Object)
+var questions = [
+{
+    q:"This is my first question",
+    possibleAnswers:["one","two","three"],
+    a:"one"
+},
+{
+    q:"This is my second question",
+    possibleAnswers:["one","two","three"],
+    a:"one"
+}
+]
+// A function to make sure we can start from the very beginning
+start = (i) => {
+// put the timer on the page
+// start the timer
+var timer = setInterval(function()
+    time--;
+    //update the page with the time
+, 1000);
+
+qDiv.textContent = questions[i].a
+// loop over the questions[i].answers
+//add the click handler to the answers button
+// append these to the answers div
+}
+// create a function to handle the button click
+function getAnswer(params) {
+  //check the clicked button for the correct answer
+}
+start(QIndex)
