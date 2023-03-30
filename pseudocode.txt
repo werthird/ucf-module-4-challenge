@@ -1,4 +1,38 @@
 Code Quiz Plan of Attack
 
+A. Code out index.html file
+  1. View Highscore link on Left
+  2. Time: 0 start count down on Right
+  3. Challenge header, info and Start Quiz button in center of page
+    - h1 tag - Codeing Quiz Challenge
+    - p tag - inform of challenge and penalty for wrong answers
+    - button - start Quiz
+  4. Center text should be in a div that can me manipulated with javascript
 
+B. Code out style.css
+  1. Define root font and colors
+  2. Define link and button hover styles
+  3. Define color and button styles when Javascript loads onto page
 
+C. Code script file
+
+  1. Create event listener to load new content into html when start quiz button is clicked
+  2. Replace existing content on page with new content
+  3. New content should be a question, followed by 4 button options to choose from
+  4. When Start Quiz button is pressed, then timer should start to count down.
+  5. Buttons should be interactive when hovered over and pressed
+  6. Pressing button should load next question
+    a. Correct answer should add content saying correct
+    b. Incorrect answer should load incorrect content
+  7. Correct or incorrect answers should be logged into variable
+  8. If incorrect, adjust timer down by set amount of time.
+  9. Continue to iterate through questions - propbably around 6 questions
+  10. Bring user to end of quiz content
+    a. If timer runs out, display score and ask user initials to log score
+    b. If user answers all questions, display score and ask user initials to log score
+  11. When user enters initials, log score and initials into highscore database
+  12. Bring user to final page
+    a. display score board
+    b. button to go back to main page
+    c. button to clear scoreboard
+  13. Bring user back to main index page
