@@ -15,6 +15,17 @@ B. Code out style.css
   3. Define color and button styles when Javascript loads onto page
 
 C. Code script file
+  ==== Goal: after button is pressed, load all content onto webpage with JavaScript
+  1. Press Start Quiz button
+    A. Clear current webpage
+      - set h1 to display: none
+      - set p to display: none
+      - set button to display none
+
+    
+
+
+
 
   1. Create event listener to load new content into html when start quiz button is clicked
   2. Replace existing content on page with new content
@@ -46,3 +57,85 @@ C. Code script file
   - Build an array with the questions. Itereate through the array for the questions
   - Build an array of answer options to store the answers in
   - 
+
+
+
+
+
+  Questions and Answers:
+  I. How to write single line comments in Javascript?
+    1. <!-- comment -->
+    *2. // comment
+    3. # comment
+    4. """ comment """
+
+  II. How to write a strict equality operator in JavaScript?
+    1. =
+    2. ---
+    3. ==
+    *4. ===
+
+  III. Commonly used data types in JavaScript DO NOT include: 
+    1. alerts
+    2. strings
+    *3. booleans
+    4. numbers
+
+  IV. What would be the result of console.log(3+2+'7'+(8-4))?
+    *1. 574
+    2. 57(4)
+    3. 16
+    4. 5'7'4
+
+  V. Which IS NOT a valid for for a variable?
+    1. let color = "red";
+    2. var age = 9;
+    *3. let var = true;
+    4. const breed = 'dog';
+
+  VI. The condition in an if/else statement is enclosed within ______?
+    1. ""
+    2. {}
+    *3. ()
+    4. []
+
+
+    ================== Array of questions and answers ====================
+    const questions = [
+  // Question 1
+  {
+    question: "How to write single line comments in Javascript?",
+    answers: ['1. <!-- comment -->', '2. // comment', '3. # comment', '4. """ comment """'],
+    correct: '2. // comment',
+  },
+  // Question 2
+  {
+    question: ,
+    answers: [],
+    correct: ,
+  },
+  // Question 3
+  {
+    question: ,
+    answers: [],
+    correct: ,
+  },
+  // Question 4
+  {
+    question: ,
+    answers: [],
+    correct: ,
+  },
+  // Question 5
+  {
+    question: ,
+    answers: [],
+    correct: ,
+  },
+  // Question 6
+  {
+    question: ,
+    answers: [],
+    correct: ,
+  },
+];

@@ -19,16 +19,20 @@
       <nav>
         <ul>
           <li><a href="">Scoreboard</a></li>
-          <li><a href="">Timer: 0</a></li>
+          <li><a href=#>Timer: <span id="timer">0</span></a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <div id="container">
-        <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that the incorrect answers will penalize your highscore by ten seconds!</p>
-        <button>Start Quiz</button>
+      <div class="container" id="questionContainer">
+        <h2 id="heading">Coding Quiz Challenge</h1>
+        <p id="paragraph">Try to answer the following code-related questions within the time limit. Keep in mind that the incorrect answers will penalize your highscore by ten seconds!</p>
+      </div>
+      <div class="container" id="answersContainer">
+      </div>
+      <div class="container" id="startQuiz">
+        <button id="button">Start Quiz</button>
       </div>
       
     </main>
