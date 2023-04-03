@@ -78,7 +78,7 @@ C. Code script file
   III. Commonly used data types in JavaScript DO NOT include: 
     1. alerts
     2. strings
-    *3. booleans
+    3. booleans
     4. numbers
 
   IV. What would be the result of console.log(3+2+'7'+(8-4))?

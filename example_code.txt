@@ -204,3 +204,91 @@ function getAnswer(params) {
   //check the clicked button for the correct answer
 }
 start(QIndex)
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+New Click event method
+----------------------------------------------------------
+----------------------------------------------------------
+
+// This program sets a click listener to the whole div containing all the small div's. 
+// If the thing that we just clicked on matches a set class, then the function will run.
+
+// Use this in the quiz code, to prevent from adding a click listener to every button.
+// Rather add a click listener to the answers div, and only run the click function, if the click matches the button class.
+// Reduces the amount of code that is loaded everytime it runs.
+
+var container = document.querySelector(".container");
+
+container.addEventListener("click", function(event) {
+
+  // What we just clicked on
+  var element = event.target;
+  const number = element.dataset.number;
+
+  if ( element.matches(".box") && element.dataset.state === "hidden" ) {
+    element.textContent = number;
+    element.dataset.state = "visible";
+  } else if ( element.matches(".box") ) {
+    element.textContent = "";
+    element.dataset.state = "hidden";
+  }
+
+
+  // Set the text to date-number
+  
+});
+
+
+
+
+
+
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+How to turn an obect into an sting to send to local storage.
+Then bring it back out of local storage
+----------------------------------------------------------
+----------------------------------------------------------
+
+// How to store an object into localStorage
+// First, create the object
+const user = {
+  firstName: "Devin",
+  lastName: "Reilly",
+  password: "",
+  userName: "",
+  email: "",
+  address: ""
+}
+
+console.log(user.firstName);
+console.log(typeof user);
+
+//Then change the object into a string
+const myString = JSON.stringify(user);
+
+console.log(myString);
+console.log(typeof myString);
+
+// Then go back into local storage and get the password and parse it back into an object
+const newObject = JSON.parse(localStorage.getItem("storedPassword"));
+
+
+/* To track the high score
+  1. Create an empty array
+  2. Create a function to build an object using the data recieved from highscore and initials
+  3. Everytime someone submits thier high score and initials, parse that into the array as an object
+  4. Add those into local storage
+  5. Parse them back out into the highscore page
+*/

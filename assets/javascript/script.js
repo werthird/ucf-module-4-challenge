@@ -4,9 +4,10 @@
 // Grab the container DIV
 const questionsDiv = document.querySelector('#questionContainer');
 const answersDiv = document.querySelector('#answersContainer');
-const startQuiz = document.querySelector('#startQuiz');
+const startGame = document.querySelector('#startQuiz');
 
-const timerElement = document.querySelector("#timer");
+// Timer span
+const timerSpan = document.querySelector("#timer");
 
 // Grab the elements in the container DIV
 let containerH1 = document.querySelector('#heading');
@@ -31,6 +32,8 @@ const createH2 = document.createElement('h2');
 ====================================================================================*/
 
 let timeLeft = 31;
+let score = 0;
+let trackQuestion = 0;
 
 
 
@@ -41,23 +44,43 @@ let timeLeft = 31;
 ---------  ARRAY TO STORE QUESTIONS, OPTIONAL ANSWERS, AND CORRECT ANSWERS -----------
 ====================================================================================*/
 
-const testArray = [
+const quizArray = [
   // Question 1
   {
-    q1: "How to write single line comments in Javascript?",
-    a1: ['1. <!-- comment -->', '2. // comment', '3. # comment', '4. """ comment """'],
-    c1: '2. // comment',
+    q: "How to write single line comments in Javascript?",
+    a: ['1. <!-- comment -->', '2. // comment', '3. # comment', '4. """ comment """'],
+    c: '2. // comment',
   },
+  // Question 2
   {
-    q2: "question2", 
-    a2: "answer2", 
-    c2: "correct2" 
+    q: "How to write a strict equality operator in JavaScript?", 
+    a: ["1. =", "2. ---", "3. ==", "4. ==="], 
+    c: "4. ===" 
   },
+  // Question 3
   {
-    q3: "question3", 
-    a3: "answer3", 
-    c3: "correct3" 
-  }
+    q: "Commonly used data types in JavaScript DO NOT include:", 
+    a: ["1. booleans", "2. strings", "3. alerts", "4. numbers"], 
+    c: "3. alerts" 
+  },
+  // Question 4
+  {
+    q: "What would be the result of console.log(3+2+'7'+(8-4))",
+    a: ["1. 574", "2. 57(4)", "3. 16", "4. 5'7'4"],
+    c: "1. 574"
+  },
+  // Question 5
+  {
+    q: "Which IS NOT a valid for for a variable?",
+    a: ["1. let color = 'red';", "2. var age = 9;", "3. let var = true;", "4. const breed = 'dog';"],
+    c: "3. let var = true;"
+  },
+  // Question 6
+  {
+    q: "The condition in an if/else statement is enclosed within ______?",
+    a: ['1. ""', "2. {}", "3. ()", "4. []"],
+    c: "3. ()"
+  },
 ];
 
 
@@ -69,13 +92,11 @@ const testArray = [
 
 // Timer function
   function startTimer() {
-    // Sets interval in variable
     let timerInterval = setInterval(function() {
-      timeLeft--;
-      timerElement.textContent = `${timeLeft}`;
+      timeLeft--;                                   // Calls on timer variable and reduces 
+      timerSpan.textContent = `${timeLeft}`;        // Displays count down in span on page
 
-      if(timeLeft === 0) {
-        // Stops execution of action at set interval
+      if(timeLeft === 0) {                          // Stops timer when count down reaches 0
         clearInterval(timerInterval);
       }
     }, 1000);
@@ -83,52 +104,68 @@ const testArray = [
 
 
 // Check correct answer function
-  function clicked(event) {
-    if (event.target.textContent === testArray[0].c1) {
-    console.log('That is the correct answer!');
-    } else {
+  function clicked(event) {                              
+    if (event.target.textContent === quizArray[trackQuestion].c) {   // If correct answer is clicked
+      console.log('That is the correct answer!');
+      trackQuestion ++;                                   // Increases question tracker
+      console.log(`Question tracker: ${trackQuestion}`);
+      clearDiv();
+    } else {                                              // If incorrect answer is clicked
       console.log('Sorry, that is incorrect');
+      trackQuestion ++;                                   // Increases question tracker
+      console.log(`Question tracker: ${trackQuestion}`);
+      clearDiv();
     }
   };
 
 
+  // Clears div of questions 
+  function clearDiv() {                                   
+    const answersDiv = document.querySelector('#answersContainer'); // Grabs answers div again 
+    answersDiv.innerHTML = "";                             // Clears answers div
+    runQuiz();                                             // Runs quiz game again
+  }
 
 
-
-
-
+  // Function that starts the game, starts the timer, and runs the game quiz function
+  function startQuiz() {
+    startTimer();
+    runQuiz();
+  }
 
 
 
 
 // Event listener rewrites content when START QUIZ button is clicked
-startButton.addEventListener('click', runQuiz);
+startButton.addEventListener('click', startQuiz);
 
-// Create a function that re-writes the content in the container div
+/* ===================================================================================
+--------- RUN QUIZ FUNCTION -----------
+====================================================================================*/
+
+
 function runQuiz() {
 
-// Starts timer
-    startTimer();
-
-
 // Appends question and answers to page
-    questionsDiv.textContent = testArray[0].q1;       // Adds question to question div
+    questionsDiv.textContent = quizArray[trackQuestion].q;       // Adds question to question div
 
-    for (i=0; i<testArray[0].a1.length; i++) {        // Creates button for each item in answers array
+    for (i=0; i<quizArray[trackQuestion].a.length; i++) {        // Creates button for each item in answers array
       const but = document.createElement('button');
-      but.textContent = testArray[0].a1[i];
-      but.setAttribute('class', 'answersButton');
+      but.textContent = quizArray[trackQuestion].a[i];
+
+      but.setAttribute('class', 'answersButton');     // Sets button class and id
       but.setAttribute('id', `button${i+1}`);
 
       but.addEventListener('click', clicked);         // Adds event listener to each button
 
       answersDiv.appendChild(but);                    // Appends button to answers div
-
     }
-    startQuiz.textContent = '';                       // Clears start quiz button from screen
+    startGame.textContent = '';                       // Clears start quiz button from screen
     
     
 }
+
+
 
 
 
