@@ -90,36 +90,44 @@ const quizArray = [
 --------- GLOBAL FUNCTIONS -----------
 ====================================================================================*/
 
+// Start game function
+  function startQuiz() {
+    startTimer();
+    runQuiz();
+    startGame.textContent = '';                       // Clears start quiz button from screen
+  }
+
+
+
 // Timer function
   function startTimer() {
     let timerInterval = setInterval(function() {
       timeLeft--;                                   // Calls on timer variable and reduces 
       timerSpan.textContent = `${timeLeft}`;        // Displays count down in span on page
 
-      if(timeLeft === 0) {                          // Stops timer when count down reaches 0
+      if(timeLeft <= 0) {                          // Stops timer when count down reaches 0
         clearInterval(timerInterval);
       }
     }, 1000);
   }
 
 
+  
 // Check correct answer function
   function clicked(event) {                              
     if (event.target.textContent === quizArray[trackQuestion].c) {   // If correct answer is clicked
-      console.log('That is the correct answer!');
-      trackQuestion ++;                                   // Increases question tracker
-      console.log(`Question tracker: ${trackQuestion}`);
+      trackQuestion ++;
       clearDiv();
-    } else {                                              // If incorrect answer is clicked
-      console.log('Sorry, that is incorrect');
-      trackQuestion ++;                                   // Increases question tracker
-      console.log(`Question tracker: ${trackQuestion}`);
+    } else {                                                         // If incorrect answer is clicked
+      trackQuestion ++;
+      timeLeft = timeLeft - 10;
       clearDiv();
-    }
+    };
   };
 
 
-  // Clears div of questions 
+
+  // Clears div of questions function
   function clearDiv() {                                   
     const answersDiv = document.querySelector('#answersContainer'); // Grabs answers div again 
     answersDiv.innerHTML = "";                             // Clears answers div
@@ -127,11 +135,7 @@ const quizArray = [
   }
 
 
-  // Function that starts the game, starts the timer, and runs the game quiz function
-  function startQuiz() {
-    startTimer();
-    runQuiz();
-  }
+  
 
 
 
@@ -139,31 +143,24 @@ const quizArray = [
 // Event listener rewrites content when START QUIZ button is clicked
 startButton.addEventListener('click', startQuiz);
 
+
+
 /* ===================================================================================
 --------- RUN QUIZ FUNCTION -----------
 ====================================================================================*/
 
-
+// Appends question and answers to page function
 function runQuiz() {
-
-// Appends question and answers to page
     questionsDiv.textContent = quizArray[trackQuestion].q;       // Adds question to question div
-
     for (i=0; i<quizArray[trackQuestion].a.length; i++) {        // Creates button for each item in answers array
       const but = document.createElement('button');
       but.textContent = quizArray[trackQuestion].a[i];
-
-      but.setAttribute('class', 'answersButton');     // Sets button class and id
+      but.setAttribute('class', 'answersButton');                // Sets button class and id
       but.setAttribute('id', `button${i+1}`);
-
-      but.addEventListener('click', clicked);         // Adds event listener to each button
-
-      answersDiv.appendChild(but);                    // Appends button to answers div
-    }
-    startGame.textContent = '';                       // Clears start quiz button from screen
-    
-    
-}
+      but.addEventListener('click', clicked);                    // Adds event listener to each button
+      answersDiv.appendChild(but);                               // Appends button to answers div
+    };
+};
 
 
 
