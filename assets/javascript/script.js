@@ -5,6 +5,7 @@
 const questionsDiv = document.querySelector('#questionContainer');
 const answersDiv = document.querySelector('#answersContainer');
 const startGame = document.querySelector('#startQuiz');
+const alertMessage = document.querySelector('#alertMessage');
 
 // Timer span
 const timerSpan = document.querySelector("#timer");
@@ -13,16 +14,12 @@ const timerSpan = document.querySelector("#timer");
 let containerH1 = document.querySelector('#heading');
 let containerP = document.querySelector('#paragraph');
 let startButton = document.querySelector('#button');
-
-
+let submitLink = document.querySelector('#submitLink');
 
 
 /* ===================================================================================
 ---------  CREATE ELEMENTS TO APPEND TO PAGE -----------
 ====================================================================================*/
-
-const createH2 = document.createElement('h2');
-
 
 
 
@@ -31,13 +28,9 @@ const createH2 = document.createElement('h2');
 ---------  GLOBALLY DECLARED VARIABLES -----------
 ====================================================================================*/
 
-let timeLeft = 31;
+let timeLeft = 70;
 let score = 0;
 let trackQuestion = 0;
-
-
-
-
 
 
 /* ===================================================================================
@@ -84,8 +77,6 @@ const quizArray = [
 ];
 
 
-
-
 /* ===================================================================================
 --------- GLOBAL FUNCTIONS -----------
 ====================================================================================*/
@@ -94,7 +85,7 @@ const quizArray = [
   function startQuiz() {
     startTimer();
     runQuiz();
-    startGame.textContent = '';                       // Clears start quiz button from screen
+    startGame.style.display = 'none';                // Clears start quiz button from screen
   }
 
 
@@ -102,11 +93,11 @@ const quizArray = [
 // Timer function
   function startTimer() {
     let timerInterval = setInterval(function() {
-      timeLeft--;                                   // Calls on timer variable and reduces 
-      timerSpan.textContent = `${timeLeft}`;        // Displays count down in span on page
-
-      if(timeLeft <= 0) {                          // Stops timer when count down reaches 0
+      timeLeft--;                                                   // Calls on timer variable and reduces 
+      timerSpan.textContent = `${timeLeft}`;                        // Displays count down in span on page
+      if(timeLeft <= 0 || trackQuestion === quizArray.length) {     // Stops timer when count down reaches 0
         clearInterval(timerInterval);
+        finalScore();
       }
     }, 1000);
   }
@@ -114,15 +105,22 @@ const quizArray = [
 
   
 // Check correct answer function
-  function clicked(event) {                              
-    if (event.target.textContent === quizArray[trackQuestion].c) {   // If correct answer is clicked
-      trackQuestion ++;
-      clearDiv();
-    } else {                                                         // If incorrect answer is clicked
-      trackQuestion ++;
-      timeLeft = timeLeft - 10;
-      clearDiv();
+  function checkAnswer(event) {    
+    alertMessage.style.opacity = 1;
+    if (event.target.textContent === quizArray[trackQuestion].c) {
+      alertMessage.textContent = 'Correct!';
+      setTimeout(function(){                            // Function to fade out message after set time
+        alertMessage.style.opacity = '0';
+      }, 2000);
+    } else {
+      timeLeft = timeLeft - 10;                       // Reduced timeleft for incorrect answers
+      alertMessage.textContent = 'Incorrect.'; 
+      setTimeout(function(){                            // Function to fade out message after set time
+        alertMessage.style.opacity = '0';
+      }, 2000);
     };
+    trackQuestion ++;                                 // Increases question tracker
+    clearDiv();                                       // Clears div of previous questions
   };
 
 
@@ -130,19 +128,22 @@ const quizArray = [
   // Clears div of questions function
   function clearDiv() {                                   
     const answersDiv = document.querySelector('#answersContainer'); // Grabs answers div again 
-    answersDiv.innerHTML = "";                             // Clears answers div
-    runQuiz();                                             // Runs quiz game again
-  }
+    answersDiv.innerHTML = "";                                      // Clears answers div
+    checkEndGame();                                                 // Runs quiz game again
+  };
 
 
+  function checkEndGame() {
+    if (timeLeft <= 0 || trackQuestion === quizArray.length) {
+      finalScore();
+    } else {
+      runQuiz();
+    };
+  };
   
-
-
-
 
 // Event listener rewrites content when START QUIZ button is clicked
 startButton.addEventListener('click', startQuiz);
-
 
 
 /* ===================================================================================
@@ -157,14 +158,35 @@ function runQuiz() {
       but.textContent = quizArray[trackQuestion].a[i];
       but.setAttribute('class', 'answersButton');                // Sets button class and id
       but.setAttribute('id', `button${i+1}`);
-      but.addEventListener('click', clicked);                    // Adds event listener to each button
+      but.addEventListener('click', checkAnswer);                // Adds event listener to each button
       answersDiv.appendChild(but);                               // Appends button to answers div
     };
 };
 
 
+// Displays final score on page function
+function finalScore() {
+  questionsDiv.textContent = `Your score is ${timeLeft} points!`;
+  const answersDiv = document.querySelector('#answersContainer'); // Grabs answers div again 
+  
+  answersDiv.innerHTML = "";                                      // Clears answers div
+  const initLabel = document.createElement('label');
+  initLabel.setAttribute('for', 'initialsInput');
+  initLabel.textContent = 'Please enter your initials to save your score!';
+  answersDiv.appendChild(initLabel);                              // Appends text label to page
+  const initInput = document.createElement('input');
+  initInput.type = 'text';
+  initInput.setAttribute('class', 'initialsInput');
+  initInput.setAttribute('id', 'initialsInput')
+  answersDiv.appendChild(initInput);                              // Appends text input to page
 
+  startGame.style.display = '';                                   // Shows hidden div
+  startButton.style.display = 'none';                             // Hides startButton
+  submitLink.style.display = '';                                  // Shows submit button
 
-
-    
+  submitLink.addEventListener('click', function() {               // Logs score and initials into local storage
+    localStorage.setItem('initials', initInput.value);
+    localStorage.setItem('score', timeLeft);
+  });
+};
 

@@ -1,4 +1,18 @@
-// function to create li list
+/* ===================================================================================
+---------------       GRAB ELEMENTS FROM PAGE         ---------------
+====================================================================================*/
+// Grab the container DIV
+const questionsDiv = document.querySelector('#questionContainer');
+const answersDiv = document.querySelector('#answersContainer');
+const startGame = document.querySelector('#startQuiz');
+
+// Timer span
+const timerSpan = document.querySelector("#timer");
+
+// Grab the elements in the container DIV
+let containerH1 = document.querySelector('#heading');
+let containerP = document.querySelector('#paragraph');
+let startButton = document.querySelector('#button');
 
 /* in function
     - create button
@@ -6,13 +20,13 @@
     - append button to page
 */
 
-const quesDiv = document.querySelector('#questionCont');
-let array = ["one", "two", "three"];
+function finalScore() {
+  questionsDiv.textContent = 'Please enter your initials to save your highscore';       // Adds question to question div
+  const initInput = document.createElement('input');
+  initInput.type = 'text';
+  initInput.setAttribute('class', 'initialsInput');
 
-let buttons = '';
-
-for (i=0; i<array.length; i++) {
-  let but = document.createElement('button');
-  but.textContent = array[i];
-  quesDiv.appendChild(but);
+  answersDiv.appendChild(initInput);
 }
+
+finalScore();

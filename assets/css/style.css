@@ -55,6 +55,9 @@ button:hover {
   color: var(--color-dark);
 }
 
+#alertMessage {
+  transition: opacity 1s;
+}
 
 
 
@@ -75,6 +78,13 @@ button:hover {
   margin-bottom: 0;
   padding: 10px 20px;
   border-radius: 10px;
+}
+.container a {
+  text-decoration: none;
+  color: var(--color-dark);
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 
