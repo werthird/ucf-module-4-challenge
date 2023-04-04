@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>INPUT - Code Quiz Practice</title>
+    <title>OUTPUT - Code Quiz Practice</title>
     <style>
       main {
         background-color: darkgreen;
@@ -27,6 +27,22 @@
       header {
         align-self: flex-end;
       }
+      ul {
+        border: 1px solid darkgreen;
+        list-style: none;
+        padding: 2px;
+      }
+      li {
+        border: 1px solid blue;
+        margin: 5px;
+      }
+      #userList {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        padding: 10px;
+        border: 2px solid hotpink;
+      }
     </style>
   </head>
   <body>
@@ -39,15 +55,16 @@
 
 
             
-        <label for="input">Input 1</label>
-        <input type="text" class="textInput" id="input1">
-        <a href="score.html"><button id="submit">Submit</button></a>
-
+        <h1>Output</h1>
+        <div id="userList">
+          <ul id="userName"></ul>
+          <ul id="userScore"></ul>
+        </div>
 
 
 
       </div>
     </main>
-    <script src="script.js"></script>
+    <script src="score_script.js"></script>
   </body>
 </html>

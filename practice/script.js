@@ -1,32 +1,39 @@
-/* ===================================================================================
----------------       GRAB ELEMENTS FROM PAGE         ---------------
-====================================================================================*/
-// Grab the container DIV
-const questionsDiv = document.querySelector('#questionContainer');
-const answersDiv = document.querySelector('#answersContainer');
-const startGame = document.querySelector('#startQuiz');
 
-// Timer span
-const timerSpan = document.querySelector("#timer");
+// Grab input1 from page
+let inputField1 = document.querySelector('#input1');
+// Grab the button from the page
+let submitButton = document.querySelector('#submit');
+// Grab timer span value
+let timer = document.querySelector('#timer').textContent;
 
-// Grab the elements in the container DIV
-let containerH1 = document.querySelector('#heading');
-let containerP = document.querySelector('#paragraph');
-let startButton = document.querySelector('#button');
+let trackArray;
 
-/* in function
-    - create button
-    - add value to button from array
-    - append button to page
-*/
+// let trackArray = [];
+if ( localStorage.getItem('score') ) {
+    const stringArray = localStorage.getItem('score');
+    trackArray = JSON.parse(stringArray);
+  } else {
+    trackArray = [];
+  }
 
-function finalScore() {
-  questionsDiv.textContent = 'Please enter your initials to save your highscore';       // Adds question to question div
-  const initInput = document.createElement('input');
-  initInput.type = 'text';
-  initInput.setAttribute('class', 'initialsInput');
+  console.log(trackArray);
 
-  answersDiv.appendChild(initInput);
-}
+// // Add an event listener to button
+submitButton.addEventListener('click', function() {
 
-finalScore();
+  // Creates an object for each submit and pushes into array
+  let userScore = {
+    name: inputField1.value,
+    score: timer,
+  };
+  trackArray.push(userScore);
+
+  // Change trackArray into a string
+  const arrayString = JSON.stringify(trackArray);
+  console.log(arrayString);
+
+  localStorage.setItem('score', arrayString);
+
+  
+});
+

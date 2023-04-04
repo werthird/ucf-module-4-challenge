@@ -31,7 +31,7 @@ let submitLink = document.querySelector('#submitLink');
 let timeLeft = 70;
 let score = 0;
 let trackQuestion = 0;
-
+let scoreTrack;
 
 /* ===================================================================================
 ---------  ARRAY TO STORE QUESTIONS, OPTIONAL ANSWERS, AND CORRECT ANSWERS -----------
@@ -75,6 +75,9 @@ const quizArray = [
     c: "3. ()"
   },
 ];
+
+
+
 
 
 /* ===================================================================================
@@ -164,17 +167,20 @@ function runQuiz() {
 };
 
 
+
 // Displays final score on page function
 function finalScore() {
   questionsDiv.textContent = `Your score is ${timeLeft} points!`;
   const answersDiv = document.querySelector('#answersContainer'); // Grabs answers div again 
   
   answersDiv.innerHTML = "";                                      // Clears answers div
-  const initLabel = document.createElement('label');
+
+  const initLabel = document.createElement('label');              //Creates label for input
   initLabel.setAttribute('for', 'initialsInput');
   initLabel.textContent = 'Please enter your initials to save your score!';
-  answersDiv.appendChild(initLabel);                              // Appends text label to page
-  const initInput = document.createElement('input');
+  answersDiv.appendChild(initLabel);
+  
+  const initInput = document.createElement('input');              // Creates input for initials
   initInput.type = 'text';
   initInput.setAttribute('class', 'initialsInput');
   initInput.setAttribute('id', 'initialsInput')
@@ -183,10 +189,34 @@ function finalScore() {
   startGame.style.display = '';                                   // Shows hidden div
   startButton.style.display = 'none';                             // Hides startButton
   submitLink.style.display = '';                                  // Shows submit button
-
-  submitLink.addEventListener('click', function() {               // Logs score and initials into local storage
-    localStorage.setItem('initials', initInput.value);
-    localStorage.setItem('score', timeLeft);
-  });
 };
+
+
+
+
+
+
+if ( localStorage.getItem('score') ) {
+  const stringArray = localStorage.getItem('score');
+  scoreTrack = JSON.parse(stringArray);
+} else {
+  scoreTrack = [];
+}
+
+// // Add an event listener to button
+submitLink.addEventListener('click', function() {
+  // Creates an object for each submit and pushes into array
+  let initInput = document.querySelector('#initialsInput');
+  let userScore = {
+    name: initInput.value,
+    score: timeLeft,
+  };
+  scoreTrack.push(userScore);
+
+  // Change trackArray into a string
+  const arrayString = JSON.stringify(scoreTrack);
+
+  localStorage.setItem('score', arrayString);
+});
+
 

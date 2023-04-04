@@ -1,0 +1,16 @@
+ul {
+  border: 1px solid darkgreen;
+  list-style: none;
+  padding: 2px;
+}
+li {
+  border: 1px solid blue;
+  margin: 5px;
+}
+#userList {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: 10px;
+  border: 2px solid hotpink;
+}

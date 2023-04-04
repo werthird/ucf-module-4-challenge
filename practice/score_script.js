@@ -1,3 +1,4 @@
+
 // Grabs the ulUser from the page
 const ulName = document.querySelector('#userName');
 // Grabs the ulScore from the page
@@ -8,6 +9,8 @@ const ulScore = document.querySelector('#userScore');
 const stringArray = localStorage.getItem('score');
 // Changes string into array of objects
 const newArray = JSON.parse(stringArray);
+console.log(newArray);
+
 
 
 
@@ -22,3 +25,6 @@ for (i=0; i<newArray.length; i++) {
   liScore.textContent = newArray[i].score;
   ulScore.appendChild(liScore);
 }
+
+
+
