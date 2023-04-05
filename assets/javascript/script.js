@@ -28,7 +28,7 @@ let submitLink = document.querySelector('#submitLink');
 ---------  GLOBALLY DECLARED VARIABLES -----------
 ====================================================================================*/
 
-let timeLeft = 70;
+let timeLeft = 51;
 let score = 0;
 let trackQuestion = 0;
 let scoreTrack;

@@ -37,7 +37,7 @@ THEN I can save my initials and score
 ## Mock-Up
 Here is a link to the loaded webpage, and a screen shot of the landing page.
 
-[Link text Here](https://link-url-here.org)
+[Visit the page here](https://werthird.github.io/ucf-module-4-challenge/)
 
 ![Code Quiz Landing Page Screenshot](/assets/images/code-quiz-screenshot.jpg "Code Quiz Landing Page Screenshot").
 
