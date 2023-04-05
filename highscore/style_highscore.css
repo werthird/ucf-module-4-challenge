@@ -1,16 +1,60 @@
+/* ======================================
+---------- MAIN STYLES ------------
+========================================*/
+/* main container */
+#userList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+  width: 50%;
+}
+/* ul container */
+.column {
+  min-width: 150px;
+  color: var(--color-white);
+  background-color: var(--color-black);
+  border: var(--border-dark);
+  padding: 10px;
+}
+h3 {
+  border-bottom: 3px solid var(--color-dark);
+}
 ul {
-  border: 1px solid darkgreen;
+  width: 70px;
+  margin: 0 auto;
   list-style: none;
   padding: 2px;
 }
 li {
-  border: 1px solid blue;
-  margin: 5px;
+  font-size: 1.2em;
+  margin: 10px;
+  border-bottom: 1px solid var(--color-light);
 }
-#userList {
+
+/* Buttons Div */
+#buttonDiv {
   display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  padding: 10px;
-  border: 2px solid hotpink;
+  flex-direction: row;
+  justify-content: center;
+  width: 30%;
+}
+#returnHome,
+#buttonReturn,
+#buttonClear {
+  margin: 0;
+}
+#buttonClear {
+  margin-left: 10px;
+}
+/* return home link */
+.returnHome {
+  font-size: 1.2em;
+  text-decoration: none;
+  color: var(--color-black);
+}
+.returnHome:hover {
+  padding: 2px;
+  background-color: var(--color-light);
+  border-radius: 3px;
 }

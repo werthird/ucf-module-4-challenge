@@ -13,16 +13,26 @@
     <link rel="stylesheet" href="../assets/css/normalize.css">
     <link rel="stylesheet" href="../assets/css/style_root.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="style_highscore.css">
   </head>
   <body>
     <main>
       <h1>Score Board</h1>
-      <div class="container userList">
-        <ul id="userName"></ul>
-        <ul id="userScore"></ul>
+      <div class="container" id="userList">
+        <div class="column">
+          <h3>Initials</h3>
+          <ul id="userName"></ul>
+        </div>
+        <div class="column">
+          <h3>Score</h3>
+          <ul id="userScore"></ul>
+        </div> 
       </div>
-      <div class="container">
-        <p><a href="../index.html" id="link">Back to Home Page</a></p>
+      <div class="container" id="buttonDiv">
+        <a href="../index.html" id="returnHome">
+          <button class="scoreboardButton" id="buttonReturn">Return Home</button>
+        </a>
+        <button class="scoreboardButton" id="buttonClear">Clear Score</button>
       </div>
     </main>
     

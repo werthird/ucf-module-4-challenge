@@ -4,7 +4,7 @@
 // Grab the container DIV
 const questionsDiv = document.querySelector('#questionContainer');
 const answersDiv = document.querySelector('#answersContainer');
-const startGame = document.querySelector('#startQuiz');
+const startGame = document.querySelector('#startQuizDiv');
 const alertMessage = document.querySelector('#alertMessage');
 
 // Timer span
@@ -76,10 +76,6 @@ const quizArray = [
   },
 ];
 
-
-
-
-
 /* ===================================================================================
 --------- GLOBAL FUNCTIONS -----------
 ====================================================================================*/
@@ -136,6 +132,7 @@ const quizArray = [
   };
 
 
+  // Checks if game should end function
   function checkEndGame() {
     if (timeLeft <= 0 || trackQuestion === quizArray.length) {
       finalScore();
@@ -156,6 +153,7 @@ startButton.addEventListener('click', startQuiz);
 // Appends question and answers to page function
 function runQuiz() {
     questionsDiv.textContent = quizArray[trackQuestion].q;       // Adds question to question div
+    questionsDiv.setAttribute('class', 'enlargen');
     for (i=0; i<quizArray[trackQuestion].a.length; i++) {        // Creates button for each item in answers array
       const but = document.createElement('button');
       but.textContent = quizArray[trackQuestion].a[i];
@@ -167,8 +165,10 @@ function runQuiz() {
 };
 
 
+/* ===================================================================================
+--------- SUBMIT SCORE FUNCTION -----------
+====================================================================================*/
 
-// Displays final score on page function
 function finalScore() {
   questionsDiv.textContent = `Your score is ${timeLeft} points!`;
   const answersDiv = document.querySelector('#answersContainer'); // Grabs answers div again 
@@ -177,13 +177,14 @@ function finalScore() {
 
   const initLabel = document.createElement('label');              //Creates label for input
   initLabel.setAttribute('for', 'initialsInput');
+  initLabel.setAttribute('id', 'initialsLabel');
   initLabel.textContent = 'Please enter your initials to save your score!';
   answersDiv.appendChild(initLabel);
   
   const initInput = document.createElement('input');              // Creates input for initials
   initInput.type = 'text';
   initInput.setAttribute('class', 'initialsInput');
-  initInput.setAttribute('id', 'initialsInput')
+  initInput.setAttribute('id', 'initialsInput');
   answersDiv.appendChild(initInput);                              // Appends text input to page
 
   startGame.style.display = '';                                   // Shows hidden div
@@ -192,31 +193,27 @@ function finalScore() {
 };
 
 
+/* ===================================================================================
+--------- LOCAL STORAGE FUNCTION -----------
+====================================================================================*/
+// Checks if local storage already has score stored
+if ( localStorage.getItem('score') ) {                      // If local storage has score scored
+  const stringArray = localStorage.getItem('score');        
+  scoreTrack = JSON.parse(stringArray);                     // Build object and pass into scoreTrack array
+} else {                                                    // If local storage does not
+  scoreTrack = [];                                          // Set scoreTrack to empty array
+};
 
-
-
-
-if ( localStorage.getItem('score') ) {
-  const stringArray = localStorage.getItem('score');
-  scoreTrack = JSON.parse(stringArray);
-} else {
-  scoreTrack = [];
-}
-
-// // Add an event listener to button
+// Submits score into local storage
 submitLink.addEventListener('click', function() {
-  // Creates an object for each submit and pushes into array
-  let initInput = document.querySelector('#initialsInput');
-  let userScore = {
+  let initInput = document.querySelector('#initialsInput'); // Grabs input from page
+  let userScore = {                                         // Creates new object from input and timeLeft
     name: initInput.value,
     score: timeLeft,
   };
-  scoreTrack.push(userScore);
-
-  // Change trackArray into a string
-  const arrayString = JSON.stringify(scoreTrack);
-
-  localStorage.setItem('score', arrayString);
+  scoreTrack.push(userScore);                               // Appends to scoreTrack array
+  const arrayString = JSON.stringify(scoreTrack);           // Changes scoreTrack into string
+  localStorage.setItem('score', arrayString);               // Sends scoreTrack into local storage
 });
 
 
